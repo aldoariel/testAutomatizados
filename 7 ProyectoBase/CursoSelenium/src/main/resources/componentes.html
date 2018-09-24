@@ -1,0 +1,297 @@
+<html xmlns="http://www.w3.org/1999/xhtml" encoding="ISO-8859-1"> 
+<head>
+<title>Campo de Entrenamiento</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+function createPopup(title){
+	var popup = open("", title, "width=300,height=200");
+	var txt = popup.document.createElement("TEXTAREA");
+
+	popup.document.body.appendChild(txt);
+}
+
+function timingChange() { 
+	setTimeout(
+		function(){
+			document.getElementById('resultado').innerHTML = "<input type='text' id='nuevoCampo'>"},3000); 
+}
+
+function clicado() { 
+	document.getElementById('buttonSimple').value = "Gracias!"
+}
+
+function volvio() { 
+	document.getElementById('resultado').innerHTML = "Volvio!"; 
+}
+
+function hacerRegistro() {
+	if(document.getElementById('elementosForm:nombre').value == '') {
+		alert("Nombre es obligatorio");
+		return;
+	}
+	if(document.getElementById('elementosForm:apellido').value == '') {
+		alert("Apellido es obligatorio");
+		return;
+	}
+	if(!document.getElementById('elementosForm:sexo:0').checked &&
+			!document.getElementById('elementosForm:sexo:1').checked) {
+		alert("Sexo es obligatorio");
+		return;
+	}
+	if(document.getElementById('elementosForm:comidaFavorita:3').checked &&
+			(document.getElementById('elementosForm:comidaFavorita:0').checked || 
+				document.getElementById('elementosForm:comidaFavorita:1').checked)) {
+		alert("Seguro que eres vegetariano?");
+		return;
+	}
+	var deportes = '';
+	var options = document.getElementById('elementosForm:deportes').options;
+	for(var i = 0; i < options.length; i++) {
+		if(options[i].selected){
+			deportes += ' ' + options[i].text + ' '; 
+		}
+		if(deportes.indexOf('Que es deporte?') != -1 && deportes.length != 19) {
+			alert("Haces deportes o no?");
+			return;
+		}
+	}
+	document.getElementById('resultado').innerHTML = 
+		"<span>Registrado!</span><br/>"
+			+ "<div id='descNombre'>Nombre: <span>" + document.getElementById('elementosForm:nombre').value + "</span></div>"
+			+ "<div id='descApellido'>Apellido: <span>" + document.getElementById('elementosForm:apellido').value + "</span></div>"
+			+ "<div id='descSexo'>Sexo: <span>" + (document.getElementById('elementosForm:sexo:0').checked? 'Masculino': (document.getElementById('elementosForm:sexo:1').checked? 'Femenino': 'Desconocido')) + "</span></div>"
+			+ "<div id=\'descComida\'>Comida: <span>" + (document.getElementById('elementosForm:comidaFavorita:0').checked? ' Carne ': '') 
+					+ (document.getElementById('elementosForm:comidaFavorita:1').checked? ' Pollo ': '') 
+					+ (document.getElementById('elementosForm:comidaFavorita:2').checked? ' Pizza ': '') 
+					+ (document.getElementById('elementosForm:comidaFavorita:3').checked? ' Vegetariano ': '') + "</span></div>"
+			+ "<div id='descEscolaridad'>Escolaridad: <span>" + document.getElementById('elementosForm:escolaridad').value + "</span></div>"
+			+ "<div id='descDeportes'>Deportes: <span>" + deportes + "</span></div>"
+			+ "<div id='descSugerencias'>Sugerencias: <span>" + document.getElementById('elementosForm:sugerencias').value + "</span></div>";
+}
+
+</script>
+</head>
+<body>
+	<center>
+		<div id="mensage"></div>
+		<form id="elementosForm" name="elementosForm" method="post"
+			enctype="application/x-www-form-urlencoded">
+			<input type="hidden" name="elementosForm" value="elementosForm" />
+
+			<h3>Campo de Entrenamiento</h3>
+			<input type="button" id="buttonSimple" value="Clique Me!" onClick="javascript:clicado()">
+			<input type="button" id="buttonPopUpEasy" value="Abrir Popup" onClick="javascript:createPopup('Popup')">
+			<input type="button" id="buttonPopUpHard" value="Abrir Popup  Malo" onClick="javascript:createPopup('')">
+			<input type="button" id="buttonDelay" value="Respuesta Demorada" onClick="javascript:timingChange()">
+			<iframe id="frame1" src="frame.html" style="border: 0px" height="20"></iframe>
+			<table bgcolor="FFDEAD">
+				<tbody>
+					<tr>
+						<td><label for="elementosForm:nombre">Nombre:</label></td>
+						<td><input id="elementosForm:nombre" type="text"
+							name="elementosForm:nombre" maxlength="30" size="30" /></td>
+					</tr>
+					<tr>
+						<td><label for="elementosForm:apellido">Apellido:</label></td>
+						<td><input id="elementosForm:apellido" type="text"
+							name="elementosForm:apellido" maxlength="30" size="30" /></td>
+					</tr>
+					<tr>
+						<td><label for="elementosForm:sexo">Sexo:</label></td>
+						<td><table id="elementosForm:sexo">
+								<tr>
+									<td><input type="radio" name="elementosForm:sexo"
+										id="elementosForm:sexo:0" value="M" /><label
+										for="elementosForm:sexo:0"> Masculino</label></td>
+									<td><input type="radio" name="elementosForm:sexo"
+										id="elementosForm:sexo:1" value="F" /><label
+										for="elementosForm:sexo:1"> Femenino</label></td>
+								</tr>
+							</table></td>
+					</tr>
+					<tr>
+						<td><label for="elementosForm:comidaFavorita">Cual es
+								su comida favorita?</label></td>
+						<td><table id="elementosForm:comidaFavorita">
+								<tr>
+									<td><input name="elementosForm:comidaFavorita"
+										id="elementosForm:comidaFavorita:0" value="carne"
+										type="checkbox" /><label for="elementosForm:comidaFavorita:0"
+										class=""> Carne</label></td>
+									<td><input name="elementosForm:comidaFavorita"
+										id="elementosForm:comidaFavorita:1" value="frango"
+										type="checkbox" /><label for="elementosForm:comidaFavorita:1"
+										class=""> Pollo</label></td>
+									<td><input name="elementosForm:comidaFavorita"
+										id="elementosForm:comidaFavorita:2" value="pizza"
+										type="checkbox" /><label for="elementosForm:comidaFavorita:2"
+										class=""> Pizza</label></td>
+									<td><input name="elementosForm:comidaFavorita"
+										id="elementosForm:comidaFavorita:3" value="vegetariano"
+										type="checkbox" /><label for="elementosForm:comidaFavorita:3"
+										class=""> Vegetariano</label></td>
+								</tr>
+							</table></td>
+					</tr>
+					<tr>
+						<td><label for="elementosForm:escolaridad">Escolaridad:</label></td>
+						<td><select id="elementosForm:escolaridad"
+							name="elementosForm:escolaridad" size="1">
+								<option value="priincomp">Primario incompleto</option>
+								<option value="pricomp">Primario completo</option>
+								<option value="secincomp">Secundario incompleto</option>
+								<option value="seccomp">Secundario completo</option>
+								<option value="superior">Superior</option>
+								<option value="especializacion">Especializacion</option>
+								<option value="maestrado">Maestrado</option>
+								<option value="doctorado">Doctorado</option>
+						</select></td>
+					</tr>
+					<tr>
+						<td><label for="elementosForm:deportes">Practica
+								deportes?</label></td>
+						<td>
+							<select multiple id="elementosForm:deportes">
+								<option value="natacion">Natacion</option>
+								<option value="futbol">Futbol</option>
+								<option value="Carrera">Carrera</option>
+								<option value="Karate">Karate</option>
+								<option value="nada">Que es deporte?</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td><label for="elementosForm:sugerencias">Sugerencias:</label></td>
+						<td><textarea id="elementosForm:sugerencias"
+								name="elementosForm:sugerencias" cols="50" rows="10"></textarea></td>
+					</tr>
+					<tr>
+						<td><br /></td>
+						<td><table id="elementosForm:tableUsuarios" border="1">
+								<thead>
+									<tr>
+										<th scope="col">Nombre</th>
+										<th scope="col">Escolaridad</th>
+										<th scope="col">Boton</th>
+										<th scope="col">Checkbox</th>
+										<th scope="col">Radio</th>
+										<th scope="col">Input</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Francisco</td>
+										<td>Superior</td>
+										<td><input type="button"
+											value="Clique aqui" onclick="alert('Francisco')" /></td>
+										<td><input type="checkbox" /></td>
+										<td><table>
+												<tr>
+													<td><input type="radio" value="1" /></td>
+												</tr>
+											</table></td>
+										<td><input type="text" size="20" /></td>
+									</tr>
+									<tr>
+										<td>Maria</td>
+										<td>Doctorado</td>
+										<td><input type="button" name="elementosForm:tableUsuarios:2:j_idt440"
+											value="Clique aqui" onclick="alert('Maria')" /></td>
+										<td><input type="checkbox"/></td>
+										<td><table>
+												<tr>
+													<td><input type="radio" value="1" /></td>
+												</tr>
+											</table></td>
+										<td><input type="text" size="20" /></td>
+									</tr>
+									<tr>
+										<td>Usuario A</td>
+										<td>Maestrado</td>
+										<td><input type="button"
+											value="Clique aqui" onclick="alert('Usuario A')" /></td>
+										<td><input type="checkbox" /></td>
+										<td><table>
+												<tr>
+													<td><input type="radio" value="1" /></td>
+												</tr>
+											</table></td>
+										<td><input type="text" size="20" /></td>
+									</tr>
+									<tr>
+										<td>Doctorado</td>
+										<td>Doctorado</td>
+										<td><input type="button"
+											value="Clique aqui" onclick="alert('Doctorado')" /></td>
+										<td><input type="checkbox" /></td>
+										<td><table>
+												<tr>
+													<td><input type="radio" value="1" /></td>
+												</tr>
+											</table></td>
+										<td><input type="text" size="20" /></td>
+									</tr>
+									<tr>
+										<td>Usuario B</td>
+										<td>Superior</td>
+										<td><input type="button"
+											value="Clique aqui" onclick="alert('Usuario B')" /></td>
+										<td><input type="checkbox"/></td>
+										<td><table>
+												<tr>
+													<td><input type="radio" value="1" /></td>
+												</tr>
+											</table></td>
+										<td><input type="text" size="20" /></td>
+									</tr>
+								</tbody>
+							</table></td>
+					</tr>
+					<tr>
+						<td><label for="elementosForm:tablaSinJSF"><span>Tabla
+								sin header</span></label></td>
+						<td>
+							<table id="tablaSinJSF">
+								<tr>
+									<td>Nombre</td>
+									<td>Escolaridad</td>
+								</tr>
+								<tr>
+									<td>Usuario A</td>
+									<td>Maestrado</td>
+								</tr>
+								<tr>
+									<td>Usuario B</td>
+									<td>Analfabeto</td>
+								</tr>
+
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td><input id="elementosForm:registrar" type="button"
+							name="elementosForm:registrar" value="Registrar"
+							onclick="javascript:hacerRegistro()" /></td>
+					</tr>
+				</tbody>
+			</table>
+			<span class="facilEncontrar">Cuidado donde clica, muchas trampas...</span>
+			<input type="hidden" name="javax.faces.ViewState"
+				id="j_id1:javax.faces.ViewState:0"
+				value="-8482990028596267160:-5465474793192341771" autocomplete="off" />
+		</form>
+		<br />
+		<div id="resultado">Status: No registrado</div>
+		<br />
+	<center>
+		<input type="button" id="alert" value="Alert" onclick="alert('Alert Simples');" />
+		<input type="button" id="confirm" value="Confirm" onclick="if(confirm('Confirm Simples')) alert('Confirmado'); else alert('Negado');" />
+		<input type="button" id="prompt" value="Prompt" onclick="var result = prompt('Digite un numero'); if(confirm('Era '+ result + '?')) alert(':D'); else alert(':(');" />
+	</center>
+		<br />
+		<a href="#" onclick="javascript:volvio()">Volver</a>
+	</center>
+	<iframe id="frame2" src="frame.html" style="border: 0px" height="20"></iframe>
+	Para realizar pruebas  Test  automatizados com Selenium Webdriver</a>
+</body>
+</html>
